@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:marvel_catalog/firebase_options.dart';
+import 'package:marvel_catalog/views/pass_reset.dart';
 import 'views/login_page.dart';
 import 'views/register_page.dart';
 import 'views/home_page.dart';
@@ -20,15 +21,20 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
         title: 'Heróis',
-        theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
-          useMaterial3: true,
-        ),
+        theme: kbthem,
         initialRoute: '/',
         routes: {
           '/': (context) => LoginPage(),
           '/register': (context) => RegisterPage(),
           '/home': (context) => const HomePage(),
+          '/passreset': (context) => PasswordResetPage()
         });
   }
 }
+
+// Tema
+final ThemeData kbthem = ThemeData(
+    brightness: Brightness.light,
+    primaryColor: Colors.green,
+    hintColor: Colors.blue,
+    fontFamily: 'Georgia');
