@@ -7,6 +7,8 @@ class RegisterPage extends StatelessWidget {
   final TextEditingController confirmPasswordController =
       TextEditingController();
 
+  RegisterPage({super.key});
+
   void signUp(BuildContext context) async {
     if (passwordController.text == confirmPasswordController.text) {
       try {
@@ -31,30 +33,30 @@ class RegisterPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Cadastro'),
+        title: const Text('Cadastro'),
       ),
       body: Padding(
-        padding: EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             TextField(
               controller: emailController,
-              decoration: InputDecoration(labelText: 'Email'),
+              decoration: const InputDecoration(labelText: 'Email'),
             ),
             TextField(
               controller: passwordController,
               obscureText: true,
-              decoration: InputDecoration(labelText: 'senha'),
+              decoration: const InputDecoration(labelText: 'senha'),
             ),
             TextField(
               controller: confirmPasswordController,
               obscureText: true,
-              decoration: InputDecoration(labelText: 'Confirm senha'),
+              decoration: const InputDecoration(labelText: 'Confirm senha'),
             ),
             ElevatedButton(
               onPressed: () => signUp(context),
-              child: Text('Cadastrar'),
+              child: const Text('Cadastrar'),
             ),
           ],
         ),

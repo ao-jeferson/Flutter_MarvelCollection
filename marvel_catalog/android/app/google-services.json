@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "996194713374",
+    "project_id": "catalogo-marvel-af56b",
+    "storage_bucket": "catalogo-marvel-af56b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:996194713374:android:bb712c585a402ceaced30f",
+        "android_client_info": {
+          "package_name": "com.kb.marvel_catalog"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCHo0s13W106nnQ1WaFPDYrA9yGXomweBw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

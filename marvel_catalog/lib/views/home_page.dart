@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class HomePage extends StatelessWidget {
+  const HomePage({super.key});
+
   void signOut(BuildContext context) async {
     await FirebaseAuth.instance.signOut();
     Navigator.pushReplacementNamed(context, '/');
@@ -11,16 +13,16 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Home'),
+        title: const Text('Home'),
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text('Welcome!'),
+            const Text('Welcome!'),
             ElevatedButton(
               onPressed: () => signOut(context),
-              child: Text('Sign Out'),
+              child: const Text('Sign Out'),
             ),
           ],
         ),
