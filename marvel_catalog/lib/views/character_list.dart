@@ -66,7 +66,7 @@ class _CharacterListState extends State<CharacterList> {
             final character = widget.characterStore.characters[index];
             return ListTile(
               title: Text(character.name),
-              subtitle: Text(character.description),
+              //subtitle: Text(character.),
             );
           },
         );

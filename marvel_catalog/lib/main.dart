@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:marvel_catalog/firebase_options.dart';
+import 'package:marvel_catalog/helpers/firebase_options.dart';
+import 'package:marvel_catalog/stores/character_store.dart';
+import 'package:marvel_catalog/views/character_list.dart';
 import 'package:marvel_catalog/views/pass_reset.dart';
 import 'views/login_page.dart';
 import 'views/register_page.dart';
@@ -28,6 +30,7 @@ class MyApp extends StatelessWidget {
           '/register': (context) => RegisterPage(),
           '/home': (context) => const HomePage(),
           '/passreset': (context) => PasswordResetPage()
+          // '/characterlist' : (context)=> CharacterList(characterStore: ,)
         });
   }
 }
