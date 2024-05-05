@@ -5,6 +5,8 @@ import 'package:marvel_catalog/stores/character_store.dart';
 class MyApp extends StatelessWidget {
   final characterStore = CharacterStore();
 
+  MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -14,7 +16,7 @@ class MyApp extends StatelessWidget {
       ),
       home: Scaffold(
         appBar: AppBar(
-          title: Text('Marvel Characters'),
+          title: const Text('Marvel Characters'),
         ),
         body: CharacterList(characterStore: characterStore),
       ),
@@ -25,7 +27,7 @@ class MyApp extends StatelessWidget {
 class CharacterList extends StatefulWidget {
   final CharacterStore characterStore;
 
-  CharacterList({required this.characterStore});
+  const CharacterList({super.key, required this.characterStore});
 
   @override
   _CharacterListState createState() => _CharacterListState();

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class PasswordResetPage extends StatefulWidget {
+  const PasswordResetPage({super.key});
+
   @override
   _PasswordResetPageState createState() => _PasswordResetPageState();
 }

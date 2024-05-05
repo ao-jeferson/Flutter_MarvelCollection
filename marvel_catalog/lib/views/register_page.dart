@@ -53,7 +53,7 @@ class RegisterPage extends StatelessWidget {
         context: context,
         builder: (context) => AlertDialog(
           title: const Text('Erro'),
-          content: Text('Senhas Diferentes.'),
+          content: const Text('Senhas Diferentes.'),
           actions: [
             TextButton(
               onPressed: () => Navigator.pop(context),
