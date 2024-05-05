@@ -6,8 +6,9 @@ class Utils {
     return md5.convert(utf8.encode(input)).toString();
   }
 
-  static String generateMarvelHash(String publicKey, String privateKey) {
-    final ts = DateTime.now().millisecondsSinceEpoch.toString();
+//var hash = CryptoJS.MD5(timestamp + privatekey+ publicKey);
+  static String generateMarvelHash(
+      String ts, String publicKey, String privateKey) {
     final preHash = ts + privateKey + publicKey;
     return generateMd5(preHash);
   }

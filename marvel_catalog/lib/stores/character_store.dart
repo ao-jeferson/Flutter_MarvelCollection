@@ -7,17 +7,25 @@ part 'character_store.g.dart';
 class CharacterStore = _CharacterStore with _$CharacterStore;
 
 abstract class _CharacterStore with Store {
-  final MarvelApi _api = MarvelApi();
-  final ObservableList<Character> characters = ObservableList<Character>();
-  int _init = 0;
+  final MarvelApi _apiService = MarvelApi();
+  final int _limit = 10;
+  int _interval = 0;
+
+  @observable
+  ObservableList<Character> characters = ObservableList<Character>();
+
+  @observable
+  bool isLoading = false;
+
+  @observable
+  int interval = 0;
 
   @action
   Future<void> fetchCharacters() async {
-    final Map<String, dynamic> response = await _api.getCharacters(_init);
-    final List<dynamic> results = response['data']['results'];
-    final List<Character> fetchedCharacters =
-        results.map((json) => Character.fromJson(json)).toList();
-    characters.addAll(fetchedCharacters);
-    _init += 20;
+    final List<Character> newCharacters =
+        await _apiService.getCharacters(_interval, _limit);
+
+    characters.addAll(newCharacters);
+    _interval += _limit;
   }
 }

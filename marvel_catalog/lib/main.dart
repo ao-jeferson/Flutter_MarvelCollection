@@ -26,14 +26,13 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
         title: 'Heróis',
         theme: kbthem,
-        initialRoute: '/characterlist',
+        initialRoute: '/home',
         routes: {
           '/': (context) => LoginPage(),
           '/register': (context) => RegisterPage(),
-          //      '/home': (context) => const HomePage(),
+          '/home': (context) => Characterlist(),
           '/passreset': (context) => PasswordResetPage(),
-          '/characterlist': (context) =>
-              CharacterList(characterStore: characterStore)
+          '/characterlist': (context) => Characterlist()
         });
   }
 }
