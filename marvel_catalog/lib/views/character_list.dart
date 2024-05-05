@@ -1,86 +1,70 @@
-// import 'package:flutter/material.dart';
-// import 'package:flutter_mobx/flutter_mobx.dart';
-// import 'package:marvel_catalog/shared/components/mv_drawer.dart';
-// import 'package:marvel_catalog/stores/character_store.dart';
+import 'package:flutter/material.dart';
+import 'package:marvel_catalog/stores/character_store.dart';
 
-// // class MyApp extends StatelessWidget {
-// //   final characterStore = CharacterStore();
+class CharactersList extends StatefulWidget {
+  final CharacterStore _characterStore = CharacterStore();
 
-// //   MyApp({super.key});
+  //CharactersList({super.key, required this.CharactersStore});
 
-// //   @override
-// //   Widget build(BuildContext context) {
-// //     return MaterialApp(
-// //       title: 'Marvel Characters',
-// //       theme: ThemeData(
-// //         primarySwatch: Colors.blue,
-// //       ),
-// //       home: Scaffold(
-// //         appBar: AppBar(
-// //           title: const Text('Marvel Characters'),
-// //         ),
-// //         body: CharacterList(characterStore: characterStore),
-// //       ),
-// //     );
-// //   }
-// // }
+  @override
+  _CharactersListState createState() => _CharactersListState();
+}
 
-// class CharacterList extends StatefulWidget {
-//   final CharacterStore characterStore = CharacterStore();
+class _CharactersListState extends State<CharactersList> {
+  final _scrollController = ScrollController();
 
-//   CharacterList({super.key});
+  @override
+  void initState() {
+    super.initState();
+    _scrollController.addListener(_scrollListener);
+    widget._characterStore.fetchCharacters();
+  }
 
-//   // const CharacterList({super.key, required this.characterStore});
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
 
-//   @override
-//   _CharacterListState createState() => _CharacterListState();
-// }
+  void _scrollListener() {
+    if (_scrollController.offset >=
+            _scrollController.position.maxScrollExtent &&
+        !_scrollController.position.outOfRange &&
+        !widget._characterStore.isLoading) {
+      widget._characterStore.fetchCharacters();
+    }
+  }
 
-// class _CharacterListState extends State<CharacterList> {
-//   final ScrollController _scrollController = ScrollController();
-
-//   @override
-//   // void initState() {
-//   //   super.initState();
-//   //   widget.characterStore.fetchCharacters();
-//   //   _scrollController.addListener(_scrollListener);
-//   // }
-
-//   @override
-//   void dispose() {
-//     _scrollController.dispose();
-//     super.dispose();
-//   }
-
-//   // void _scrollListener() {
-//   //   if (_scrollController.init >=
-//   //           _scrollController.position.maxScrollExtent &&
-//   //       !_scrollController.position.outOfRange) {
-//   //     widget.characterStore.fetchCharacters();
-//   //   }
-// //   // }
-
-// //   @override
-// //   Widget build(BuildContext context) {
-// //     return Scaffold(
-// //       appBar: AppBar(
-// //         title: const Text('Home'),
-// //       ),
-// //       drawer: const MvDrawer(),
-// //         Observer(
-// //           builder: (context) {
-// //             return ListView.builder(
-// //               controller: _scrollController,
-// //               itemCount: widget.characterStore.characters.length,
-// //               itemBuilder: (context, index) {
-// //                 final character = widget.characterStore.characters[index];
-// //                 return ListTile(
-// //                   title: Text(character.name),
-// //                   //subtitle: Text(character.),
-// //                 );
-// //               },
-// //             );
-// //           },   
-// //     );
-// //   }
-// // }
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: ListView.builder(
+        controller: _scrollController,
+        itemCount: widget._characterStore.characters.length + 1,
+        itemBuilder: (context, index) {
+          if (index < widget._characterStore.characters.length) {
+            final character = widget._characterStore.characters[index];
+            return ListTile(
+              leading: Image.network(character.imageUrl),
+              title: Text(character.name),
+            );
+          } else if (!widget._characterStore.isLoading) {
+            return Center(
+              child: ElevatedButton(
+                onPressed: () {
+                  widget._characterStore.fetchCharacters();
+                },
+                child: const Text('Load More'),
+              ),
+            );
+          } else {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+        },
+      ),
+    );
+  }
+}

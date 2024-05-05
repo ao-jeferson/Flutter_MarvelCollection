@@ -25,6 +25,38 @@ mixin _$CharacterStore on _CharacterStore, Store {
     });
   }
 
+  late final _$isLoadingAtom =
+      Atom(name: '_CharacterStore.isLoading', context: context);
+
+  @override
+  bool get isLoading {
+    _$isLoadingAtom.reportRead();
+    return super.isLoading;
+  }
+
+  @override
+  set isLoading(bool value) {
+    _$isLoadingAtom.reportWrite(value, super.isLoading, () {
+      super.isLoading = value;
+    });
+  }
+
+  late final _$intervalAtom =
+      Atom(name: '_CharacterStore.interval', context: context);
+
+  @override
+  int get interval {
+    _$intervalAtom.reportRead();
+    return super.interval;
+  }
+
+  @override
+  set interval(int value) {
+    _$intervalAtom.reportWrite(value, super.interval, () {
+      super.interval = value;
+    });
+  }
+
   late final _$fetchCharactersAsyncAction =
       AsyncAction('_CharacterStore.fetchCharacters', context: context);
 
@@ -36,7 +68,9 @@ mixin _$CharacterStore on _CharacterStore, Store {
   @override
   String toString() {
     return '''
-characters: ${characters}
+characters: ${characters},
+isLoading: ${isLoading},
+interval: ${interval}
     ''';
   }
 }

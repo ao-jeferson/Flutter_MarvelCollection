@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:marvel_catalog/shared/components/mv_drawer.dart';
 import 'package:marvel_catalog/stores/character_store.dart';
 
 class Characterlist extends StatefulWidget {
@@ -22,6 +23,7 @@ class _CharacterlistState extends State<Characterlist> {
       appBar: AppBar(
         title: const Text('Personagens da Marvel'),
       ),
+      drawer: const MvDrawer(),
       body: Observer(
         builder: (_) {
           if (_characterStore.isLoading && _characterStore.characters.isEmpty) {
@@ -32,10 +34,15 @@ class _CharacterlistState extends State<Characterlist> {
               itemCount: _characterStore.characters.length,
               itemBuilder: (context, index) {
                 final character = _characterStore.characters[index];
-                return ListTile(
-                  title: Text(character.name),
-                  leading: Image.network(character.imageUrl),
-                  // Aqui você pode adicionar a lógica para exibir os quadrinhos em que o personagem aparece
+                return Card(
+                  child: ListTile(
+                    onTap: () => Navigator.pushNamed(
+                        context, '/Characterdetail',
+                        arguments: {character.id}),
+                    title: Text(character.name),
+                    leading: Image.network(character.imageUrl),
+                    subtitle: Text(character.description),
+                  ),
                 );
               },
             );
