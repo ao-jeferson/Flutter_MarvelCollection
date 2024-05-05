@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
         title: 'Heróis',
         theme: kbthem,
-        initialRoute: '/home',
+        initialRoute: '/',
         routes: {
           '/': (context) => LoginPage(),
           '/register': (context) => RegisterPage(),
