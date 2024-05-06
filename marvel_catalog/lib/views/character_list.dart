@@ -56,7 +56,7 @@ class _CharactersListState extends State<CharactersList> {
                       child: ListTile(
                         onTap: () => Navigator.pushNamed(
                             context, '/Characterdetail',
-                            arguments: {character.id}),
+                            arguments: {'characterId': character.id}),
                         title: Text(character.name),
                         leading: Image.network(character.imageUrl),
                         subtitle: Text(character.description.isNotEmpty &&

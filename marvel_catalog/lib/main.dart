@@ -33,8 +33,11 @@ class MyApp extends StatelessWidget {
           '/register': (context) => RegisterPage(),
           '/home': (context) => CharactersList(),
           '/passreset': (context) => PasswordResetPage(),
-          '/characterdetail': (context) =>
-              CharacterDetailsPage(characterId: 1011334) //id padrão do 3d man
+          '/characterdetail': (context) {
+            final args = ModalRoute.of(context)?.settings.arguments as Map;
+            return CharacterDetailsPage(characterId: args['characterId']);
+            //CharacterDetailsPage(characterId: 1011334) //id padrão do 3d man
+          }
         });
   }
 }
