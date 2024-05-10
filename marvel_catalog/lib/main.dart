@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:marvel_catalog/Controllers/character_controller.dart';
 import 'package:marvel_catalog/helpers/firebase_options.dart';
-import 'package:marvel_catalog/stores/character_store.dart';
-import 'package:marvel_catalog/views/character_detail.dart';
-import 'package:marvel_catalog/views/character_list.dart';
-import 'package:marvel_catalog/views/pass_reset.dart';
-import 'views/login_page.dart';
-import 'views/register_page.dart';
+import 'package:marvel_catalog/views/character_detail_view.dart';
+import 'package:marvel_catalog/views/character_list_view.dart';
+import 'package:marvel_catalog/views/pass_reset_view.dart';
+import 'views/login_view.dart';
+import 'views/register_view.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -20,7 +20,7 @@ void main() async {
 class MyApp extends StatelessWidget {
   MyApp({super.key});
 
-  final characterStore = CharacterStore();
+  final characterStore = CharacterController();
 
   @override
   Widget build(BuildContext context) {
@@ -29,15 +29,17 @@ class MyApp extends StatelessWidget {
         theme: kbthem,
         initialRoute: '/',
         routes: {
-          '/': (context) => LoginPage(),
-          '/register': (context) => RegisterPage(),
-          '/home': (context) => CharactersList(),
-          '/passreset': (context) => PasswordResetPage(),
-          '/characterdetail': (context) {
-            final args = ModalRoute.of(context)?.settings.arguments as Map;
-            return CharacterDetailsPage(characterId: args['characterId']);
-            //CharacterDetailsPage(characterId: 1011334) //id padrão do 3d man
-          }
+          '/': (context) => LoginView(),
+          '/register': (context) => RegisterView(),
+          '/home': (context) => CharactersListView(),
+          '/passreset': (context) => PasswordResetView(),
+          // '/characterdetail': (context) =>
+          //     CharacterDetailView(), //id padrão do 3d man
+          // //{
+          // final args = ModalRoute.of(context)?.settings.arguments as Map;
+          // return CharacterDetailsBody(characterId: args['characterId']);
+          //CharacterDetailsView(characterId: 1011334) //id padrão do 3d man
+          //}
         });
   }
 }

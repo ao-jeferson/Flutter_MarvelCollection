@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:marvel_catalog/Controllers/Auth_controller.dart';
+import 'package:marvel_catalog/Controllers/auth_controller.dart';
 
-class PasswordResetPage extends StatelessWidget {
-  PasswordResetPage({super.key});
+class PasswordResetView extends StatelessWidget {
+  PasswordResetView({super.key});
 
   final AuthController _authController = AuthController();
   final TextEditingController _emailController = TextEditingController();

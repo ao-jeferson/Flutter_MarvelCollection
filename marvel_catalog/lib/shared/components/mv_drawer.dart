@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:marvel_catalog/Controllers/Auth_controller.dart';
+import 'package:marvel_catalog/Controllers/auth_controller.dart';
 
 AuthController _authController = AuthController();
 

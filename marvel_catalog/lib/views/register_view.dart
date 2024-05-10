@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:marvel_catalog/Controllers/Auth_controller.dart';
+import 'package:marvel_catalog/Controllers/auth_controller.dart';
 
-class RegisterPage extends StatelessWidget {
+class RegisterView extends StatelessWidget {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController confirmPasswordController =
@@ -9,7 +9,7 @@ class RegisterPage extends StatelessWidget {
 
   AuthController authController = AuthController();
 
-  RegisterPage({super.key});
+  RegisterView({super.key});
 
   @override
   Widget build(BuildContext context) {

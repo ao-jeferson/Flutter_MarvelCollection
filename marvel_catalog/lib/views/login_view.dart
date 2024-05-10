@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:marvel_catalog/Controllers/auth_controller.dart';
 
-class LoginPage extends StatelessWidget {
-  LoginPage({super.key});
+class LoginView extends StatelessWidget {
+  LoginView({super.key});
 
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();

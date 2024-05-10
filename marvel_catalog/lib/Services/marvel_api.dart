@@ -26,34 +26,34 @@ class MarvelApi {
     }
   }
 
-  static Future<Character> fetchCharacter(int characterId) async {
-    final response = await http.get(
-      Uri.parse('$_baseUrl/characters/$characterId?apikey=$_publicKey'),
-    );
+  static Future<Map<String, dynamic>> fetchCharacterDetail(
+      int characterId) async {
+    final ts = DateTime.now().millisecondsSinceEpoch;
+    var hash = Utils.generateMarvelHash(ts.toString(), _publicKey, _privateKey);
+
+    final response = await http.get(Uri.parse(
+        '$_baseUrl/characters/$characterId?ts=$ts&apikey=$_publicKey&hash=$hash'));
 
     if (response.statusCode == 200) {
-      final jsonData = json.decode(response.body)['data']['results'][0];
-      final id = jsonData['id'];
-      final name = jsonData['name'];
-      final thumbnailUrl = jsonData['thumbnail']['path'] +
-          '.' +
-          jsonData['thumbnail']['extension'];
-      final description = jsonData['description'];
-
-      final comics = jsonData['comics']['items']
-          .map<String>((comic) => comic['name'])
-          .toList()
-          .cast<String>();
-
-      return Character(
-        id: id,
-        name: name,
-        imageUrl: thumbnailUrl,
-        description: description,
-        comics: comics,
-      );
+      return json.decode(response.body)['data']['results'][0];
     } else {
       throw Exception('Failed to load character');
+    }
+  }
+
+  static Future<List<Map<String, dynamic>>> fetchComics(
+      int characterId, int offset) async {
+    final ts = DateTime.now().millisecondsSinceEpoch;
+    var hash = Utils.generateMarvelHash(ts.toString(), _publicKey, _privateKey);
+
+    final response = await http.get(Uri.parse(
+        '$_baseUrl/characters/$characterId/comics?ts=$ts&apikey=$_publicKey&hash=$hash&offset=$offset'));
+
+    if (response.statusCode == 200) {
+      return List<Map<String, dynamic>>.from(
+          json.decode(response.body)['data']['results']);
+    } else {
+      throw Exception('Failed to load comics');
     }
   }
 }
